@@ -1,0 +1,114 @@
+[
+  {
+    "objectID": "coursework.html",
+    "href": "coursework.html",
+    "title": "Coursework",
+    "section": "",
+    "text": "Selected academic work from Purdue University’s Cybersecurity and Computer & Information Technology programs."
+  },
+  {
+    "objectID": "coursework.html#computational-humor-pun-analysis-with-nlp",
+    "href": "coursework.html#computational-humor-pun-analysis-with-nlp",
+    "title": "Coursework",
+    "section": "Computational Humor: Pun Analysis with NLP",
+    "text": "Computational Humor: Pun Analysis with NLP\nGraduate NLP Coursework\n\n\n\n\n\n\nTip🧠 Full pun comprehension pipeline — identification, disambiguation, explanation, and scoring\n\n\n\nTackled the SemEval 2017 shared task on phonetic puns: given a sentence containing a pun, automatically find the intended word, explain why it’s funny, and score how good the joke is.\n\n\nHumor is one of the hardest problems in NLP — puns in particular require simultaneously reasoning about phonetics, semantics, and context. This project built a five-stage pipeline to decompose the problem: find phonetically similar word pairs, pick the right sense of each, generate a natural language explanation, and output a composite quality score.\nThe design decisions were as deliberate as the implementation. BERT-based masked prediction was evaluated and rejected for word sense disambiguation in favor of Lesk similarity — not due to capability but due to the near-total absence of pun-annotated training data. GPT-3 was chosen specifically for the language generation stage where discrete methods fundamentally break down: composing fluent, coherent explanations of jokes is a generation problem, not a retrieval one.\n\n\n\n\n\n\n\n\n📊 Dataset\nSemEval 2017 phonetic pun corpus\n\n\n🔧 Pipeline\n5 stages — identification → sound similarity → disambiguation → explanation → scoring\n\n\n🤖 Generation\nGPT-3 for natural language joke explanation\n\n\n📐 Scoring\nPronunciation distance (IPA edit) + cosine distance of vectorized definitions\n\n\n🔊 Phonetics\nARPABET → IPA transcription pipeline via SoundsLike\n\n\n\n\nStack:\n\nGPT-3 NLTK SoundsLike Lesk Similarity PyDictionary\n\n\nNLP Word Sense Disambiguation IPA / ARPABET Cosine Similarity SemEval 2017"
+  },
+  {
+    "objectID": "coursework.html#enterprise-network-design-administration",
+    "href": "coursework.html#enterprise-network-design-administration",
+    "title": "Coursework",
+    "section": "Enterprise Network Design & Administration",
+    "text": "Enterprise Network Design & Administration\nCNIT 34200 — Undergraduate Networking Capstone\n\n\n\n\n\n\nNote🏗️ Full-stack enterprise network built from scratch in vSphere\n\n\n\nFour isolated network zones, an Active Directory forest spanning two sites, a custom BIND DNS resolver, and DFS replication — all provisioned and wired together end-to-end.\n\n\nMost networking coursework stops at configuration. This capstone started at the hypervisor. Every VM, NIC assignment, port group, and IP was provisioned from scratch in a shared vSphere/vCenter environment — meaning mistakes had real consequences, including accidentally routing traffic through another group’s switch port.\nThe architecture mirrored a real enterprise: a pfSense firewall segmenting WAN, HQ LAN, DMZ, and a remote office subnet; Windows Server 2019 DCs at both sites forming an AD forest; a CentOS BIND server in the DMZ replacing the upstream Purdue resolver with an internally-controlled one; and DFS namespace + replication tying HQ and Remote together for distributed file access. The three-part WAN debugging incident — a misassigned NIC, stale gateway entries, and a misconfigured server gateway all compounding simultaneously — was the most technically dense troubleshooting exercise of the program.\n\n\n\n\n\n\n\n\n🌐 Network zones\n4 — WAN, HQ LAN, DMZ, Remote office\n\n\n🖥️ VMs provisioned\npfSense, CentOS BIND, 2× Windows Server, 2× Windows client\n\n\n🗂️ Services deployed\nActive Directory, DFS namespace + replication, BIND DNS, NAT\n\n\n🐛 Debugging\n3-part WAN failure — misassigned NIC, conflicting gateways, wrong server default GW\n\n\n🔒 Security policy\nNAT outbound rules configured to block DMZ egress by design\n\n\n\n\nStack:\n\npfSense VMware vSphere Active Directory BIND DFS\n\n\nWindows Server 2019 CentOS NAT / Firewall Rules AD Sites & Services DNS Forwarding"
+  },
+  {
+    "objectID": "coursework.html#intrusion-detection-system-deployment-penetration-testing",
+    "href": "coursework.html#intrusion-detection-system-deployment-penetration-testing",
+    "title": "Coursework",
+    "section": "Intrusion Detection System Deployment & Penetration Testing",
+    "text": "Intrusion Detection System Deployment & Penetration Testing\nCNIT 45500 — Network Security\n\n\n\n\n\n\nImportant⚔️ End-to-end attack-and-detect lab — from packet capture to SOC dashboard\n\n\n\nTwo NIDS engines, two vulnerable targets, one attacker VM, and a live validated attack pipeline. Every component provisioned, configured, and verified from scratch.\n\n\nThe goal wasn’t just to install Snort — it was to build the full operational context around it. That meant standing up a realistic target environment (Metasploitable and Ultimate LAMP), provisioning an attacker machine (Kali), and wiring two Security Onion instances together as a distributed detection stack, all on a pfSense-segmented lab network in vSphere.\nSnort ran as the capture sensor using PF_RING for high-throughput packet ingestion, Emerging Threats Open signatures, and Zeek for protocol analysis and file extraction. Suricata sat downstream as the event correlator and SOC-facing dashboard. The pipeline was validated end-to-end: a slow loris HTTP flood and an nmap port scan launched from Kali hit the Ultimate LAMP machine, were captured by Snort, forwarded via Filebeat, and surfaced as alerts in Suricata’s management UI. A production-realistic configuration detail — Snort’s PulledPork signature updater was blocked by the WAN firewall at startup — required diagnosing and temporarily opening egress for the rule download before hardening back down.\n\n\n\n\n\n\n\n\n🖥️ VMs deployed\n4 — Kali (attacker), Metasploitable, Ultimate LAMP, 2× Security Onion\n\n\n🔍 NIDS engines\nSnort (sensor) + Suricata (correlator) running in parallel\n\n\n⚡ Attacks validated\nSlow loris HTTP flood + nmap port scan, end-to-end through the pipeline\n\n\n📦 Log pipeline\nSnort → Filebeat → Suricata → Elasticsearch → SOC dashboard\n\n\n🌐 Ruleset\nEmerging Threats Open via PulledPork, tuned to RFC-1918 HOME_NET\n\n\n\n\nStack:\n\nSnort Suricata Security Onion Zeek Filebeat Elasticsearch\n\n\nKali Linux pfSense PF_RING PulledPork VMware vSphere"
+  },
+  {
+    "objectID": "coursework.html#vulnerability-assessment-remediation",
+    "href": "coursework.html#vulnerability-assessment-remediation",
+    "title": "Coursework",
+    "section": "Vulnerability Assessment & Remediation",
+    "text": "Vulnerability Assessment & Remediation\nCNIT 47100 — Ethical Hacking & Network Defense\n\n\n\n\n\n\nWarning🔴 7 critical vulnerabilities found — 2 exploited, 1 remediated and re-verified\n\n\n\nFull assessment lifecycle against Metasploitable 2 & 3: discovery, exploitation, fix, and a follow-up scan to prove it.\n\n\nVulnerability scanning is easy. Understanding what the findings actually mean — and proving you can both exploit and fix them — is the real exercise. This lab ran the complete assessment lifecycle: automated scanning with Nessus and nmap-vulners to build a findings inventory, manual exploitation of two critical vulnerabilities to demonstrate real impact, remediation of one, and a follow-up Nessus scan to verify the fix was effective and not just assumed.\nThe two exploits chosen were deliberately different in character. The VNC takeover was trivially simple — the password was literally password — but demonstrated full graphical remote control of the machine, making the business risk viscerally obvious. The ProFTPD mod_copy exploit was more surgical: anonymous FTP access combined with SITE CPFR/SITE CPTO to silently copy /etc/passwd to a web-accessible path without authentication. No credentials, no noise, one command.\n\n\n\n\n\n\n\n\n🔴 Critical vulns found\n7 via Nessus — bind shell backdoor, weak RNG in OpenSSH/OpenSSL, NFS disclosure, VNC\n\n\n📋 CVEs catalogued\n20 application/version pairs across ProFTPD, OpenSSH, ISC Bind via nmap-vulners\n\n\n💥 Exploits demonstrated\n2 — VNC remote takeover (Metasploitable 2), ProFTPD passwd exfil (Metasploitable 3)\n\n\n✅ Remediation verified\nVNC password hardened via vncpasswd, clean re-scan confirmed\n\n\n🛡️ WAF detection\nwafw00f identified ModSecurity on certifiedhacker.com; no WAF on either target\n\n\n\n\nStack:\n\nNessus nmap wafw00f VNC ProFTPD\n\n\nCVE Analysis Vulnerability Remediation Network Scanning WAF Detection Exploit Development"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Pranav Bhusari",
+    "section": "",
+    "text": "Hey, I’m Pranav! I most recently worked as an AI/ML vulnerability researcher at Cromulence, building and fine-tuning LLMs for code generation and document translation in air-gapped environments.\nOutside of work, I’ve been building STEM Network — a city-scale IoT sensor network for monitoring urban street trees that won 1st place globally at Microsoft’s Azure IoT hackathon and landed real deployment funding from the City of Boulder.\nI’m into the full stack of ML: from data curation pipelines and LoRA fine-tuning all the way down to embedded systems and LoRaWAN gateways.\nGet in touch View experience"
+  },
+  {
+    "objectID": "index.html#about-me",
+    "href": "index.html#about-me",
+    "title": "Pranav Bhusari",
+    "section": "",
+    "text": "Hey, I’m Pranav! I most recently worked as an AI/ML vulnerability researcher at Cromulence, building and fine-tuning LLMs for code generation and document translation in air-gapped environments.\nOutside of work, I’ve been building STEM Network — a city-scale IoT sensor network for monitoring urban street trees that won 1st place globally at Microsoft’s Azure IoT hackathon and landed real deployment funding from the City of Boulder.\nI’m into the full stack of ML: from data curation pipelines and LoRA fine-tuning all the way down to embedded systems and LoRaWAN gateways.\nGet in touch View experience"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Pranav Bhusari",
+    "section": "Education",
+    "text": "Education\nPurdue University — West Lafayette, IN | Aug 2024\n\nM.S., Computer and Information Technology\nB.S., Cybersecurity — Summa Cum Laude, Dean’s List (All Semesters)\nGPA: 3.8"
+  },
+  {
+    "objectID": "index.html#skills",
+    "href": "index.html#skills",
+    "title": "Pranav Bhusari",
+    "section": "Skills",
+    "text": "Skills\nFrom experience:\n\nML & AI\nPyTorch HuggingFace Transformers PEFT / LoRA vLLM DeepSpeed DDP / FSDP GRPO MLflow LM Eval KV-cache Optimization\n\n\nData Engineering\nPandas cuDF PyArrow Parquet Elasticsearch SQL\n\n\nSystems & Backend\nC C# .NET Python Docker PostgreSQL Bash ELK Stack Kibana\n\n\nCloud & IoT\nMicrosoft Azure Azure IoT Hub LoRaWAN MQTT Tableau Denodo\n\nFrom coursework:\n\nNetwork Security\nSnort Suricata Security Onion Zeek Nessus nmap Kali Linux pfSense\n\n\nInfrastructure & Admin\nVMware vSphere Active Directory BIND DNS DFS Windows Server CentOS"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "May 2021 – Summer 2024 · DevPost\n\n\n\n\n\n\nNote🏆 1st Place — Microsoft Azure IoT Hack for Sustainability (Global)\n\n\n\nBuilt a deployment-ready demo in 48 hours. Endorsed by San José city arborists and backed by peer-reviewed urban forestry research.\n\n\n\n\n\nSTEM Network live dashboard showing soil moisture readings across monitored trees\n\n\nUrban forests are critical infrastructure — but newly-planted street trees have up to 30% annual mortality, largely from inadequate watering during the first few years of establishment. STEM is a city-scale IoT sensor network that gives urban foresters real-time soil moisture visibility across every monitored tree, turning reactive tree care into data-driven stewardship.\nWhat started as a hackathon project became a real deployment. After winning globally, I took STEM from prototype to a working local network — securing Microsoft for Startups backing and $10,000 from the City of Boulder, Colorado to fund the first sensor rollout. I continued developing the system as a Purdue directed project, spending the summer of 2024 on the hardware side: designing and building out a LoRaWAN gateway and conducting a rigorous embedded system power study to validate the 5-year battery life target for field-deployed sensor nodes.\nEach node is a capacitive moisture sensor paired with an ESP32 microcontroller, potted in vandalism-resistant PVC housing for underground installation. Readings stream over MQTT → LoRaWAN gateway → Azure IoT Hub → Stream Analytics → SQL Server, surfaced through an ASP.NET Core dashboard with Azure Maps and Charts.js for geospatial and historical views.\n\n\n\n\n\n\n\n\n🚀 Deployment\nTaken to a live local network — from 48-hour demo to real-world rollout\n\n\n💰 Funding\n$110,000 total — $100K Microsoft for Startups credits + $10K City of Boulder\n\n\n🌍 Hackathon\n1st place globally, Microsoft Azure IoT Hack for Sustainability\n\n\n📡 Hardware\nBuilt LoRaWAN gateway + embedded power study (Summer 2024)\n\n\n🎓 Academic\nContinued as a Purdue directed project through graduation\n\n\n🌲 Problem\n30% annual urban tree mortality — solved through continuous soil monitoring\n\n\n\n\nStack:\n\nC# .NET / ASP.NET Core Python ESP32\n\n\nAzure IoT Hub Azure Stream Analytics Azure Blob Storage Azure SQL Server Azure Maps Microsoft for Startups\n\n\nLoRaWAN MQTT Embedded Systems Power Analysis Bootstrap Charts.js"
+  },
+  {
+    "objectID": "projects.html#street-tree-monitoring-network-stem",
+    "href": "projects.html#street-tree-monitoring-network-stem",
+    "title": "Projects",
+    "section": "",
+    "text": "May 2021 – Summer 2024 · DevPost\n\n\n\n\n\n\nNote🏆 1st Place — Microsoft Azure IoT Hack for Sustainability (Global)\n\n\n\nBuilt a deployment-ready demo in 48 hours. Endorsed by San José city arborists and backed by peer-reviewed urban forestry research.\n\n\n\n\n\nSTEM Network live dashboard showing soil moisture readings across monitored trees\n\n\nUrban forests are critical infrastructure — but newly-planted street trees have up to 30% annual mortality, largely from inadequate watering during the first few years of establishment. STEM is a city-scale IoT sensor network that gives urban foresters real-time soil moisture visibility across every monitored tree, turning reactive tree care into data-driven stewardship.\nWhat started as a hackathon project became a real deployment. After winning globally, I took STEM from prototype to a working local network — securing Microsoft for Startups backing and $10,000 from the City of Boulder, Colorado to fund the first sensor rollout. I continued developing the system as a Purdue directed project, spending the summer of 2024 on the hardware side: designing and building out a LoRaWAN gateway and conducting a rigorous embedded system power study to validate the 5-year battery life target for field-deployed sensor nodes.\nEach node is a capacitive moisture sensor paired with an ESP32 microcontroller, potted in vandalism-resistant PVC housing for underground installation. Readings stream over MQTT → LoRaWAN gateway → Azure IoT Hub → Stream Analytics → SQL Server, surfaced through an ASP.NET Core dashboard with Azure Maps and Charts.js for geospatial and historical views.\n\n\n\n\n\n\n\n\n🚀 Deployment\nTaken to a live local network — from 48-hour demo to real-world rollout\n\n\n💰 Funding\n$110,000 total — $100K Microsoft for Startups credits + $10K City of Boulder\n\n\n🌍 Hackathon\n1st place globally, Microsoft Azure IoT Hack for Sustainability\n\n\n📡 Hardware\nBuilt LoRaWAN gateway + embedded power study (Summer 2024)\n\n\n🎓 Academic\nContinued as a Purdue directed project through graduation\n\n\n🌲 Problem\n30% annual urban tree mortality — solved through continuous soil monitoring\n\n\n\n\nStack:\n\nC# .NET / ASP.NET Core Python ESP32\n\n\nAzure IoT Hub Azure Stream Analytics Azure Blob Storage Azure SQL Server Azure Maps Microsoft for Startups\n\n\nLoRaWAN MQTT Embedded Systems Power Analysis Bootstrap Charts.js"
+  },
+  {
+    "objectID": "experience.html",
+    "href": "experience.html",
+    "title": "Experience",
+    "section": "",
+    "text": "Parsons, Cromulence | Sept 2024 – Dec 2025\nSpecific project details are subject to confidentiality agreements — available upon request.\n\nResearched and developed LLM-based systems for specialized government applications in air-gapped environments\nDesigned and curated large-scale proprietary datasets for pretraining, fine-tuning, and reinforcement learning workflows\nOptimized model inference and training pipelines for resource-constrained deployments\nDelivered measurable, customer-facing results that secured sustained operational funding\n\n\nPyTorch HuggingFace Transformers PEFT / LoRA vLLM DeepSpeed DDP / FSDP GRPO MLflow LM Eval KV-cache Optimization Pandas cuDF PyArrow Parquet Python C"
+  },
+  {
+    "objectID": "experience.html#aiml-cybersecurity-researcher",
+    "href": "experience.html#aiml-cybersecurity-researcher",
+    "title": "Experience",
+    "section": "",
+    "text": "Parsons, Cromulence | Sept 2024 – Dec 2025\nSpecific project details are subject to confidentiality agreements — available upon request.\n\nResearched and developed LLM-based systems for specialized government applications in air-gapped environments\nDesigned and curated large-scale proprietary datasets for pretraining, fine-tuning, and reinforcement learning workflows\nOptimized model inference and training pipelines for resource-constrained deployments\nDelivered measurable, customer-facing results that secured sustained operational funding\n\n\nPyTorch HuggingFace Transformers PEFT / LoRA vLLM DeepSpeed DDP / FSDP GRPO MLflow LM Eval KV-cache Optimization Pandas cuDF PyArrow Parquet Python C"
+  },
+  {
+    "objectID": "experience.html#cybersecurity-research-engineering-co-op",
+    "href": "experience.html#cybersecurity-research-engineering-co-op",
+    "title": "Experience",
+    "section": "Cybersecurity Research Engineering Co-op",
+    "text": "Cybersecurity Research Engineering Co-op\nPeraton Labs | Jan 2023 – Dec 2023\n\nContributed to the design, programming, and implementation of a novel, bespoke high-speed Network Intrusion Detection System (NIDS) using C, Bash, ELK Stack, Kibana, and Elasticsearch, enabling microsecond-level packet-timing fingerprinting\nCreated a mock network attack in CORE exploiting RIPv2 and IPsec routing protocols, and demonstrated a following mitigation by implementing hash table caching in C for the NIDS\n\n\nC Bash ELK Stack Kibana Elasticsearch"
+  },
+  {
+    "objectID": "experience.html#research-assistant",
+    "href": "experience.html#research-assistant",
+    "title": "Experience",
+    "section": "Research Assistant",
+    "text": "Research Assistant\nPurdue University | Jan 2022 – June 2022\n\nCoordinated directly with university and customer-facing staff to create a forensic investigation tool for compiling, analyzing, and warehousing intelligence data using .NET and C#, enabling TB-scale IoT intelligence organization for customers and addressing scalability limits of legacy forensic tooling\nDesigned backend architecture leveraging Docker, ElasticSearch, and PostgreSQL to fit scalability and performance standards\n\n\nC# .NET Docker PostgreSQL Elasticsearch"
+  },
+  {
+    "objectID": "experience.html#engineering-intern",
+    "href": "experience.html#engineering-intern",
+    "title": "Experience",
+    "section": "Engineering Intern",
+    "text": "Engineering Intern\nLawrence Livermore National Laboratories | July 2020 – August 2020\n\nDesigned and presented a project management dashboard leveraging Denodo for data virtualization across multiple silos and Tableau for executive analytics and visualization, providing a single pane-of-glass for cross-program visibility and portfolio-level decision-making\nDashboard presented to senior executive staff to support enterprise-level decisions on $500,000,000 worth of funding\n\n\nDenodo Tableau"
+  }
+]
