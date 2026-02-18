@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "Pranav Bhusari"
+  navbar:
+    left:
+      - href: index.qmd
+        text: About
+      - href: experience.qmd
+        text: Experience
+      - href: projects.qmd
+        text: Projects
+      - href: coursework.qmd
+        text: Coursework
+      - icon: linkedin
+        href: https://www.linkedin.com/in/pranav-bhusari/
+      - icon: github
+        href: https://github.com/pbhusari
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: false

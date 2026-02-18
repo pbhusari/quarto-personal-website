@@ -1,0 +1,82 @@
+---
+title: "Pranav Bhusari"
+subtitle: "AI/ML Cybersecurity Researcher"
+image: profile.jpg
+about:
+  template: trestles
+  image-shape: round
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/pbhusari
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/pranav-bhusari/
+    - icon: envelope
+      text: Email
+      href: mailto:pranavbhusari2013@gmail.com
+---
+
+## About Me
+
+Hey, I'm Pranav! I most recently worked as an AI/ML vulnerability researcher at [Cromulence](https://www.cromulence.com), building and fine-tuning LLMs for code generation and document translation in air-gapped environments.
+
+Outside of work, I've been building [STEM Network](projects.qmd) — a city-scale IoT sensor network for monitoring urban street trees that won 1st place globally at Microsoft's Azure IoT hackathon and landed real deployment funding from the City of Boulder.
+
+I'm into the full stack of ML: from data curation pipelines and LoRA fine-tuning all the way down to embedded systems and LoRaWAN gateways.
+
+[Get in touch](mailto:pranavbhusari2013@gmail.com){.btn .btn-primary} [View experience](experience.qmd){.btn .btn-outline-secondary}
+
+---
+
+## Education
+
+**Purdue University** — West Lafayette, IN | *Aug 2024*
+
+- M.S., Computer and Information Technology
+- B.S., Cybersecurity — Summa Cum Laude, Dean's List (All Semesters)
+- GPA: 3.8
+
+---
+
+## Skills
+
+*From experience:*
+
+::: skill-group
+**ML & AI**
+
+[PyTorch]{.pill .pill-blue} [HuggingFace Transformers]{.pill .pill-blue} [PEFT / LoRA]{.pill .pill-blue} [vLLM]{.pill .pill-blue} [DeepSpeed]{.pill .pill-blue} [DDP / FSDP]{.pill .pill-blue} [GRPO]{.pill .pill-blue} [MLflow]{.pill .pill-blue} [LM Eval]{.pill .pill-blue} [KV-cache Optimization]{.pill .pill-blue}
+:::
+
+::: skill-group
+**Data Engineering**
+
+[Pandas]{.pill .pill-green} [cuDF]{.pill .pill-green} [PyArrow]{.pill .pill-green} [Parquet]{.pill .pill-green} [Elasticsearch]{.pill .pill-green} [SQL]{.pill .pill-green}
+:::
+
+::: skill-group
+**Systems & Backend**
+
+[C]{.pill .pill-purple} [C#]{.pill .pill-purple} [.NET]{.pill .pill-purple} [Python]{.pill .pill-purple} [Docker]{.pill .pill-purple} [PostgreSQL]{.pill .pill-purple} [Bash]{.pill .pill-purple} [ELK Stack]{.pill .pill-purple} [Kibana]{.pill .pill-purple}
+:::
+
+::: skill-group
+**Cloud & IoT**
+
+[Microsoft Azure]{.pill .pill-orange} [Azure IoT Hub]{.pill .pill-orange} [LoRaWAN]{.pill .pill-orange} [MQTT]{.pill .pill-orange} [Tableau]{.pill .pill-orange} [Denodo]{.pill .pill-orange}
+:::
+
+*From coursework:*
+
+::: skill-group
+**Network Security**
+
+[Snort]{.pill .pill-blue} [Suricata]{.pill .pill-blue} [Security Onion]{.pill .pill-blue} [Zeek]{.pill .pill-blue} [Nessus]{.pill .pill-blue} [nmap]{.pill .pill-blue} [Kali Linux]{.pill .pill-blue} [pfSense]{.pill .pill-blue}
+:::
+
+::: skill-group
+**Infrastructure & Admin**
+
+[VMware vSphere]{.pill .pill-purple} [Active Directory]{.pill .pill-purple} [BIND DNS]{.pill .pill-purple} [DFS]{.pill .pill-purple} [Windows Server]{.pill .pill-purple} [CentOS]{.pill .pill-purple}
+:::

@@ -1,0 +1,53 @@
+---
+title: "Experience"
+---
+
+## AI/ML Cybersecurity Researcher
+**Parsons, Cromulence** | *Sept 2024 – Dec 2025*
+
+*Specific project details are subject to confidentiality agreements — available upon request.*
+
+- Researched and developed LLM-based systems for specialized government applications in air-gapped environments
+- Designed and curated large-scale proprietary datasets for pretraining, fine-tuning, and reinforcement learning workflows
+- Optimized model inference and training pipelines for resource-constrained deployments
+- Delivered measurable, customer-facing results that secured sustained operational funding
+
+::: skill-group
+[PyTorch]{.pill .pill-blue} [HuggingFace Transformers]{.pill .pill-blue} [PEFT / LoRA]{.pill .pill-blue} [vLLM]{.pill .pill-blue} [DeepSpeed]{.pill .pill-blue} [DDP / FSDP]{.pill .pill-blue} [GRPO]{.pill .pill-blue} [MLflow]{.pill .pill-blue} [LM Eval]{.pill .pill-blue} [KV-cache Optimization]{.pill .pill-blue} [Pandas]{.pill .pill-green} [cuDF]{.pill .pill-green} [PyArrow]{.pill .pill-green} [Parquet]{.pill .pill-green} [Python]{.pill .pill-purple} [C]{.pill .pill-purple}
+:::
+
+---
+
+## Cybersecurity Research Engineering Co-op
+**Peraton Labs** | *Jan 2023 – Dec 2023*
+
+- Contributed to the design, programming, and implementation of a novel, bespoke high-speed Network Intrusion Detection System (NIDS) using C, Bash, ELK Stack, Kibana, and Elasticsearch, enabling microsecond-level packet-timing fingerprinting
+- Created a mock network attack in CORE exploiting RIPv2 and IPsec routing protocols, and demonstrated a following mitigation by implementing hash table caching in C for the NIDS
+
+::: skill-group
+[C]{.pill .pill-purple} [Bash]{.pill .pill-purple} [ELK Stack]{.pill .pill-purple} [Kibana]{.pill .pill-purple} [Elasticsearch]{.pill .pill-green}
+:::
+
+---
+
+## Research Assistant
+**Purdue University** | *Jan 2022 – June 2022*
+
+- Coordinated directly with university and customer-facing staff to create a forensic investigation tool for compiling, analyzing, and warehousing intelligence data using .NET and C#, enabling TB-scale IoT intelligence organization for customers and addressing scalability limits of legacy forensic tooling
+- Designed backend architecture leveraging Docker, ElasticSearch, and PostgreSQL to fit scalability and performance standards
+
+::: skill-group
+[C#]{.pill .pill-purple} [.NET]{.pill .pill-purple} [Docker]{.pill .pill-purple} [PostgreSQL]{.pill .pill-purple} [Elasticsearch]{.pill .pill-green}
+:::
+
+---
+
+## Engineering Intern
+**Lawrence Livermore National Laboratories** | *July 2020 – August 2020*
+
+- Designed and presented a project management dashboard leveraging Denodo for data virtualization across multiple silos and Tableau for executive analytics and visualization, providing a single pane-of-glass for cross-program visibility and portfolio-level decision-making
+- Dashboard presented to senior executive staff to support enterprise-level decisions on **$500,000,000** worth of funding
+
+::: skill-group
+[Denodo]{.pill .pill-orange} [Tableau]{.pill .pill-orange}
+:::

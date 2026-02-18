@@ -1,0 +1,49 @@
+---
+title: "Projects"
+---
+
+## Street Tree Monitoring Network (STEM)
+*May 2021 – Summer 2024* · [DevPost](https://devpost.com/software/stemm-network)
+
+:::{.callout-note icon=false}
+## 🏆 1st Place — Microsoft Azure IoT Hack for Sustainability (Global)
+Built a deployment-ready demo in 48 hours. Endorsed by San José city arborists and backed by peer-reviewed urban forestry research.
+:::
+
+![STEM Network live dashboard showing soil moisture readings across monitored trees](https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/001/552/071/datas/gallery.jpg){fig-alt="STEM Network dashboard" style="border-radius: 8px; margin: 1rem 0; width: 100%;"}
+
+Urban forests are critical infrastructure — but newly-planted street trees have up to **30% annual mortality**, largely from inadequate watering during the first few years of establishment. STEM is a city-scale IoT sensor network that gives urban foresters real-time soil moisture visibility across every monitored tree, turning reactive tree care into data-driven stewardship.
+
+What started as a hackathon project became a real deployment. After winning globally, I took STEM from prototype to a working local network — securing **Microsoft for Startups** backing and **$10,000** from the City of Boulder, Colorado to fund the first sensor rollout. I continued developing the system as a **Purdue directed project**, spending the summer of 2024 on the hardware side: designing and building out a **LoRaWAN gateway** and conducting a rigorous **embedded system power study** to validate the 5-year battery life target for field-deployed sensor nodes.
+
+Each node is a capacitive moisture sensor paired with an ESP32 microcontroller, potted in vandalism-resistant PVC housing for underground installation. Readings stream over MQTT → LoRaWAN gateway → Azure IoT Hub → Stream Analytics → SQL Server, surfaced through an ASP.NET Core dashboard with Azure Maps and Charts.js for geospatial and historical views.
+
+::: {.project-stats}
+| | |
+|---|---|
+| 🚀 Deployment | **Taken to a live local network** — from 48-hour demo to real-world rollout |
+| 💰 Funding | **$110,000** total — $100K Microsoft for Startups credits + $10K City of Boulder |
+| 🌍 Hackathon | **1st place globally**, Microsoft Azure IoT Hack for Sustainability |
+| 📡 Hardware | Built LoRaWAN gateway + embedded power study (Summer 2024) |
+| 🎓 Academic | Continued as a **Purdue directed project** through graduation |
+| 🌲 Problem | **30% annual urban tree mortality** — solved through continuous soil monitoring |
+:::
+
+**Stack:**
+
+::: skill-group
+[C#]{.pill .pill-purple} [.NET / ASP.NET Core]{.pill .pill-purple} [Python]{.pill .pill-purple} [ESP32]{.pill .pill-purple}
+:::
+
+::: skill-group
+[Azure IoT Hub]{.pill .pill-orange} [Azure Stream Analytics]{.pill .pill-orange} [Azure Blob Storage]{.pill .pill-orange} [Azure SQL Server]{.pill .pill-orange} [Azure Maps]{.pill .pill-orange} [Microsoft for Startups]{.pill .pill-orange}
+:::
+
+::: skill-group
+[LoRaWAN]{.pill .pill-blue} [MQTT]{.pill .pill-blue} [Embedded Systems]{.pill .pill-blue} [Power Analysis]{.pill .pill-blue} [Bootstrap]{.pill .pill-blue} [Charts.js]{.pill .pill-blue}
+:::
+
+::: {.img-row}
+![Azure architecture diagram](https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/001/552/091/datas/gallery.jpg){fig-alt="Azure architecture" style="border-radius:6px; width:49%;"}
+![Hardware sensor node](https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/001/552/098/datas/gallery.jpg){fig-alt="Hardware sensor" style="border-radius:6px; width:49%;"}
+:::

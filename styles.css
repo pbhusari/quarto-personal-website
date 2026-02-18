@@ -1,0 +1,239 @@
+/* ── Theme tokens ──────────────────────────────────────── */
+:root {
+  --pill-blue-bg:    #dbeafe; --pill-blue-text:   #1e40af;
+  --pill-green-bg:   #d1fae5; --pill-green-text:  #065f46;
+  --pill-purple-bg:  #ede9fe; --pill-purple-text: #5b21b6;
+  --pill-orange-bg:  #ffedd5; --pill-orange-text: #9a3412;
+  --border:   #e5e7eb;
+  --muted:    #6b7280;
+  --radius:   10px;
+}
+
+[data-bs-theme="dark"] {
+  --pill-blue-bg:    #1e3a5f; --pill-blue-text:   #93c5fd;
+  --pill-green-bg:   #14532d; --pill-green-text:  #86efac;
+  --pill-purple-bg:  #3b0764; --pill-purple-text: #d8b4fe;
+  --pill-orange-bg:  #431407; --pill-orange-text: #fed7aa;
+  --border:   #374151;
+  --muted:    #9ca3af;
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+/* ── Navbar ────────────────────────────────────────────── */
+.navbar {
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  backdrop-filter: blur(8px);
+}
+
+.navbar-nav .nav-link {
+  padding-top: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: opacity 0.15s;
+}
+
+.navbar-nav .nav-link:hover {
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+/* ── Headings ──────────────────────────────────────────── */
+h2 {
+  margin-top: 2.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Links ─────────────────────────────────────────────── */
+a {
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+a:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.btn {
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.45rem 1.1rem;
+  transition: all 0.15s;
+  margin-right: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+/* ── Lists ─────────────────────────────────────────────── */
+ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+/* ── HR ────────────────────────────────────────────────── */
+hr {
+  margin: 2.25rem 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Skill pills ───────────────────────────────────────── */
+.skill-group {
+  margin-bottom: 0.6rem;
+}
+
+.skill-group p {
+  margin: 0.3rem 0 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.18rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.6;
+  transition: filter 0.15s;
+}
+
+.pill:hover { filter: brightness(0.92); }
+
+.pill-blue   { background: var(--pill-blue-bg);   color: var(--pill-blue-text);   }
+.pill-green  { background: var(--pill-green-bg);  color: var(--pill-green-text);  }
+.pill-purple { background: var(--pill-purple-bg); color: var(--pill-purple-text); }
+.pill-orange { background: var(--pill-orange-bg); color: var(--pill-orange-text); }
+
+/* ── About / trestles layout ───────────────────────────── */
+.about-entity {
+  gap: 2.5rem;
+}
+
+/* ── Project stats table ───────────────────────────────── */
+.project-stats table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.9rem;
+}
+
+.project-stats td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.project-stats td:first-child {
+  color: var(--muted);
+  white-space: nowrap;
+  width: 1%;
+  padding-right: 1.5rem;
+  font-size: 0.85rem;
+}
+
+/* ── Two-image row ─────────────────────────────────────── */
+.img-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.img-row img {
+  flex: 1;
+  min-width: 0;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+/* ── Callouts ──────────────────────────────────────────── */
+.callout {
+  border-radius: var(--radius);
+  border-left-width: 4px;
+  font-size: 0.95rem;
+}
+
+/* ── Mobile ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .about-entity {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
+  }
+
+  .about-entity .about-image {
+    width: 140px !important;
+    max-width: 140px !important;
+  }
+
+  .about-links {
+    justify-content: center;
+  }
+
+  .about-entity .about-contents {
+    width: 100% !important;
+  }
+
+  h2 {
+    font-size: 0.7rem;
+  }
+
+  .skill-group p {
+    gap: 0.3rem;
+  }
+
+  .pill {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+  }
+
+  .page-columns > .column-body {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .img-row {
+    flex-direction: column;
+  }
+
+  .img-row img {
+    width: 100% !important;
+  }
+
+  .project-stats td:first-child {
+    white-space: normal;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+  }
+
+  ul li {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    text-align: center;
+  }
+}

@@ -1,0 +1,141 @@
+---
+title: "Coursework"
+---
+
+Selected academic work from Purdue University's Cybersecurity and Computer & Information Technology programs.
+
+---
+
+## Computational Humor: Pun Analysis with NLP
+*Graduate NLP Coursework*
+
+:::{.callout-tip icon=false}
+## 🧠 Full pun comprehension pipeline — identification, disambiguation, explanation, and scoring
+Tackled the SemEval 2017 shared task on phonetic puns: given a sentence containing a pun, automatically find the intended word, explain why it's funny, and score how good the joke is.
+:::
+
+Humor is one of the hardest problems in NLP — puns in particular require simultaneously reasoning about phonetics, semantics, and context. This project built a five-stage pipeline to decompose the problem: find phonetically similar word pairs, pick the right sense of each, generate a natural language explanation, and output a composite quality score.
+
+The design decisions were as deliberate as the implementation. BERT-based masked prediction was evaluated and rejected for word sense disambiguation in favor of Lesk similarity — not due to capability but due to the near-total absence of pun-annotated training data. GPT-3 was chosen specifically for the language generation stage where discrete methods fundamentally break down: composing fluent, coherent explanations of jokes is a generation problem, not a retrieval one.
+
+::: {.project-stats}
+| | |
+|---|---|
+| 📊 Dataset | **SemEval 2017** phonetic pun corpus |
+| 🔧 Pipeline | **5 stages** — identification → sound similarity → disambiguation → explanation → scoring |
+| 🤖 Generation | **GPT-3** for natural language joke explanation |
+| 📐 Scoring | Pronunciation distance (IPA edit) + cosine distance of vectorized definitions |
+| 🔊 Phonetics | **ARPABET → IPA** transcription pipeline via SoundsLike |
+:::
+
+**Stack:**
+
+::: skill-group
+[GPT-3]{.pill .pill-blue} [NLTK]{.pill .pill-blue} [SoundsLike]{.pill .pill-blue} [Lesk Similarity]{.pill .pill-blue} [PyDictionary]{.pill .pill-blue}
+:::
+
+::: skill-group
+[NLP]{.pill .pill-green} [Word Sense Disambiguation]{.pill .pill-green} [IPA / ARPABET]{.pill .pill-green} [Cosine Similarity]{.pill .pill-green} [SemEval 2017]{.pill .pill-green}
+:::
+
+---
+
+## Enterprise Network Design & Administration
+*CNIT 34200 — Undergraduate Networking Capstone*
+
+:::{.callout-note icon=false}
+## 🏗️ Full-stack enterprise network built from scratch in vSphere
+Four isolated network zones, an Active Directory forest spanning two sites, a custom BIND DNS resolver, and DFS replication — all provisioned and wired together end-to-end.
+:::
+
+Most networking coursework stops at configuration. This capstone started at the hypervisor. Every VM, NIC assignment, port group, and IP was provisioned from scratch in a shared vSphere/vCenter environment — meaning mistakes had real consequences, including accidentally routing traffic through another group's switch port.
+
+The architecture mirrored a real enterprise: a pfSense firewall segmenting WAN, HQ LAN, DMZ, and a remote office subnet; Windows Server 2019 DCs at both sites forming an AD forest; a CentOS BIND server in the DMZ replacing the upstream Purdue resolver with an internally-controlled one; and DFS namespace + replication tying HQ and Remote together for distributed file access. The three-part WAN debugging incident — a misassigned NIC, stale gateway entries, and a misconfigured server gateway all compounding simultaneously — was the most technically dense troubleshooting exercise of the program.
+
+::: {.project-stats}
+| | |
+|---|---|
+| 🌐 Network zones | **4** — WAN, HQ LAN, DMZ, Remote office |
+| 🖥️ VMs provisioned | pfSense, CentOS BIND, 2× Windows Server, 2× Windows client |
+| 🗂️ Services deployed | Active Directory, DFS namespace + replication, BIND DNS, NAT |
+| 🐛 Debugging | 3-part WAN failure — misassigned NIC, conflicting gateways, wrong server default GW |
+| 🔒 Security policy | NAT outbound rules configured to **block DMZ egress** by design |
+:::
+
+**Stack:**
+
+::: skill-group
+[pfSense]{.pill .pill-blue} [VMware vSphere]{.pill .pill-blue} [Active Directory]{.pill .pill-blue} [BIND]{.pill .pill-blue} [DFS]{.pill .pill-blue}
+:::
+
+::: skill-group
+[Windows Server 2019]{.pill .pill-purple} [CentOS]{.pill .pill-purple} [NAT / Firewall Rules]{.pill .pill-purple} [AD Sites & Services]{.pill .pill-purple} [DNS Forwarding]{.pill .pill-purple}
+:::
+
+---
+
+## Intrusion Detection System Deployment & Penetration Testing
+*CNIT 45500 — Network Security*
+
+:::{.callout-important icon=false}
+## ⚔️ End-to-end attack-and-detect lab — from packet capture to SOC dashboard
+Two NIDS engines, two vulnerable targets, one attacker VM, and a live validated attack pipeline. Every component provisioned, configured, and verified from scratch.
+:::
+
+The goal wasn't just to install Snort — it was to build the full operational context around it. That meant standing up a realistic target environment (Metasploitable and Ultimate LAMP), provisioning an attacker machine (Kali), and wiring two Security Onion instances together as a distributed detection stack, all on a pfSense-segmented lab network in vSphere.
+
+Snort ran as the capture sensor using PF_RING for high-throughput packet ingestion, Emerging Threats Open signatures, and Zeek for protocol analysis and file extraction. Suricata sat downstream as the event correlator and SOC-facing dashboard. The pipeline was validated end-to-end: a slow loris HTTP flood and an nmap port scan launched from Kali hit the Ultimate LAMP machine, were captured by Snort, forwarded via Filebeat, and surfaced as alerts in Suricata's management UI. A production-realistic configuration detail — Snort's PulledPork signature updater was blocked by the WAN firewall at startup — required diagnosing and temporarily opening egress for the rule download before hardening back down.
+
+::: {.project-stats}
+| | |
+|---|---|
+| 🖥️ VMs deployed | **4** — Kali (attacker), Metasploitable, Ultimate LAMP, 2× Security Onion |
+| 🔍 NIDS engines | **Snort** (sensor) + **Suricata** (correlator) running in parallel |
+| ⚡ Attacks validated | Slow loris HTTP flood + nmap port scan, end-to-end through the pipeline |
+| 📦 Log pipeline | Snort → Filebeat → Suricata → Elasticsearch → SOC dashboard |
+| 🌐 Ruleset | Emerging Threats Open via PulledPork, tuned to RFC-1918 `HOME_NET` |
+:::
+
+**Stack:**
+
+::: skill-group
+[Snort]{.pill .pill-blue} [Suricata]{.pill .pill-blue} [Security Onion]{.pill .pill-blue} [Zeek]{.pill .pill-blue} [Filebeat]{.pill .pill-blue} [Elasticsearch]{.pill .pill-blue}
+:::
+
+::: skill-group
+[Kali Linux]{.pill .pill-purple} [pfSense]{.pill .pill-purple} [PF_RING]{.pill .pill-purple} [PulledPork]{.pill .pill-purple} [VMware vSphere]{.pill .pill-purple}
+:::
+
+---
+
+## Vulnerability Assessment & Remediation
+*CNIT 47100 — Ethical Hacking & Network Defense*
+
+:::{.callout-warning icon=false}
+## 🔴 7 critical vulnerabilities found — 2 exploited, 1 remediated and re-verified
+Full assessment lifecycle against Metasploitable 2 & 3: discovery, exploitation, fix, and a follow-up scan to prove it.
+:::
+
+Vulnerability scanning is easy. Understanding what the findings actually mean — and proving you can both exploit and fix them — is the real exercise. This lab ran the complete assessment lifecycle: automated scanning with Nessus and nmap-vulners to build a findings inventory, manual exploitation of two critical vulnerabilities to demonstrate real impact, remediation of one, and a follow-up Nessus scan to verify the fix was effective and not just assumed.
+
+The two exploits chosen were deliberately different in character. The VNC takeover was trivially simple — the password was literally `password` — but demonstrated full graphical remote control of the machine, making the business risk viscerally obvious. The ProFTPD mod_copy exploit was more surgical: anonymous FTP access combined with `SITE CPFR`/`SITE CPTO` to silently copy `/etc/passwd` to a web-accessible path without authentication. No credentials, no noise, one command.
+
+::: {.project-stats}
+| | |
+|---|---|
+| 🔴 Critical vulns found | **7** via Nessus — bind shell backdoor, weak RNG in OpenSSH/OpenSSL, NFS disclosure, VNC |
+| 📋 CVEs catalogued | **20** application/version pairs across ProFTPD, OpenSSH, ISC Bind via nmap-vulners |
+| 💥 Exploits demonstrated | **2** — VNC remote takeover (Metasploitable 2), ProFTPD passwd exfil (Metasploitable 3) |
+| ✅ Remediation verified | VNC password hardened via `vncpasswd`, clean re-scan confirmed |
+| 🛡️ WAF detection | `wafw00f` identified ModSecurity on `certifiedhacker.com`; no WAF on either target |
+:::
+
+**Stack:**
+
+::: skill-group
+[Nessus]{.pill .pill-blue} [nmap]{.pill .pill-blue} [wafw00f]{.pill .pill-blue} [VNC]{.pill .pill-blue} [ProFTPD]{.pill .pill-blue}
+:::
+
+::: skill-group
+[CVE Analysis]{.pill .pill-purple} [Vulnerability Remediation]{.pill .pill-purple} [Network Scanning]{.pill .pill-purple} [WAF Detection]{.pill .pill-purple} [Exploit Development]{.pill .pill-purple}
+:::
