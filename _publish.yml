@@ -1,0 +1,4 @@
+- source: project
+  gh-pages:
+    - id: "pbhusari-personal-website"
+      url: "https://pbhusari.github.io/quarto-personal-website/"
