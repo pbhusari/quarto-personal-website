@@ -18,3 +18,8 @@ Screenshot*.jpg
 *.swo
 
 **/*.quarto_ipynb
+
+# Environment variables
+.env
+.env.local
+.env.*.local
