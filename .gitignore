@@ -19,6 +19,9 @@ Screenshot*.jpg
 
 **/*.quarto_ipynb
 
+# Claude
+.claude/
+
 # Environment variables
 .env
 .env.local
