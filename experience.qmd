@@ -5,8 +5,6 @@ title: "Experience"
 ## AI/ML Cybersecurity Researcher
 **Parsons, Cromulence** | *Sept 2024 – Dec 2025*
 
-*Specific project details are subject to confidentiality agreements — available upon request.*
-
 - Researched and developed LLM-based systems for specialized government applications in air-gapped environments
 - Designed and curated large-scale proprietary datasets for pretraining, fine-tuning, and reinforcement learning workflows
 - Optimized model inference and training pipelines for resource-constrained deployments
