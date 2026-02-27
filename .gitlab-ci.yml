@@ -3,7 +3,7 @@
 # REQUIRED: Before this pipeline can run, add a secret variable in GitLab:
 #   GitLab project → Settings → CI/CD → Variables
 #   Key:   GITHUB_TOKEN
-#   Value: a GitHub Personal Access Token with "repo" scope (Contents: Read and Write)
+#   Value: a GitHub Personal Access Token with "Contents: Read and Write" permission
 #   Flags: check "Mask variable" so it never appears in logs
 
 stages:
@@ -30,19 +30,12 @@ publish:
     - quarto --version
 
   script:
-    # Build the site — outputs static HTML to _site/
-    - quarto render
-
-    # Deploy _site/ to the gh-pages branch on GitHub
     - git config --global user.email "gitlab-ci@noreply"
     - git config --global user.name "GitLab CI"
-    - cd _site
-    - git init
-    - git checkout -b gh-pages
-    - git add .
-    - git commit -m "Deploy: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-    # GITHUB_TOKEN is the secret variable you added in GitLab settings
-    - git push --force "https://x-token:${GITHUB_TOKEN}@github.com/pbhusari/quarto-personal-website.git" gh-pages
+    # Repoint origin to GitHub with the auth token so quarto publish can push there
+    - git remote set-url origin "https://x-token:${GITHUB_TOKEN}@github.com/pbhusari/quarto-personal-website.git"
+    # quarto publish renders the site and pushes _site/ to the gh-pages branch in one step
+    - quarto publish gh-pages --no-prompt
 
   # Only run this pipeline when changes are pushed to main
   rules:
