@@ -26,3 +26,6 @@ Screenshot*.jpg
 .env
 .env.local
 .env.*.local
+
+# Fedora
+31a06e5e
