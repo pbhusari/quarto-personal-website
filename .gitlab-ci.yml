@@ -1,0 +1,42 @@
+# GitLab CI/CD pipeline — builds the Quarto site and deploys to GitHub Pages
+#
+# REQUIRED: Before this pipeline can run, add a secret variable in GitLab:
+#   GitLab project → Settings → CI/CD → Variables
+#   Key:   GITHUB_TOKEN
+#   Value: a GitHub Personal Access Token with "Contents: Read and Write" permission
+#   Flags: check "Mask variable" so it never appears in logs
+
+stages:
+  - deploy
+
+publish:
+  stage: deploy
+  image: ubuntu:22.04
+
+  variables:
+    QUARTO_VERSION: "1.6.39"
+    # Prevent git from asking interactive questions
+    GIT_TERMINAL_PROMPT: "0"
+
+  before_script:
+    # Install the bare minimum needed to download and run Quarto
+    - apt-get update -qq
+    - apt-get install -y --no-install-recommends wget git ca-certificates
+    # Download and install Quarto
+    - wget -q "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb"
+    - dpkg -i "quarto-${QUARTO_VERSION}-linux-amd64.deb"
+    - rm "quarto-${QUARTO_VERSION}-linux-amd64.deb"
+    # Verify install
+    - quarto --version
+
+  script:
+    - git config --global user.email "gitlab-ci@noreply"
+    - git config --global user.name "GitLab CI"
+    # Repoint origin to GitHub with the auth token so quarto publish can push there
+    - git remote set-url origin "https://x-token:${GITHUB_TOKEN}@github.com/pbhusari/quarto-personal-website.git"
+    # quarto publish renders the site and pushes _site/ to the gh-pages branch in one step
+    - quarto publish gh-pages --no-prompt
+
+  # Only run this pipeline when changes are pushed to main
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
